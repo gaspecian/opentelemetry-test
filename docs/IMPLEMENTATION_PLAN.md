@@ -37,18 +37,18 @@ Create the OpenTelemetry monitoring infrastructure.
 Prepare the application deployment environment.
 
 **Tasks:**
-- [ ] Create `api-sample` folder structure
-- [ ] Create `docker-compose.yml` with:
-  - [ ] MongoDB service
-  - [ ] Go API service (placeholder)
-- [ ] Configure MongoDB initialization
-- [ ] Set up environment variables for:
-  - [ ] MongoDB connection string
-  - [ ] OTLP Collector endpoint
-  - [ ] Service name and version
-- [ ] Create Docker network for API and database
-- [ ] Define volume mounts for MongoDB data
-- [ ] Create Dockerfile for Go application
+- [x] Create `api-sample` folder structure
+- [x] Create `docker-compose.yml` with:
+  - [x] MongoDB service
+  - [x] Go API service (placeholder)
+- [x] Configure MongoDB initialization
+- [x] Set up environment variables for:
+  - [x] MongoDB connection string
+  - [x] OTLP Collector endpoint
+  - [x] Service name and version
+- [x] Create Docker network for API and database
+- [x] Define volume mounts for MongoDB data
+- [x] Create Dockerfile for Go application
 
 **Deliverables:**
 - Docker Compose configuration ready for application deployment
