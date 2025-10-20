@@ -104,24 +104,24 @@ Build the core API functionality.
 Add observability to the application.
 
 **Tasks:**
-- [ ] Install OpenTelemetry packages:
-  - [ ] `go.opentelemetry.io/otel`
-  - [ ] `go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc`
-  - [ ] `go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc`
-  - [ ] `go.opentelemetry.io/otel/sdk/trace`
-  - [ ] `go.opentelemetry.io/otel/sdk/metric`
-- [ ] Initialize OpenTelemetry SDK in `main.go`
-- [ ] Configure OTLP exporter
-- [ ] Add automatic instrumentation:
-  - [ ] HTTP server middleware
-  - [ ] MongoDB instrumentation
+- [x] Install OpenTelemetry packages:
+  - [x] `go.opentelemetry.io/otel`
+  - [x] `go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc`
+  - [x] `go.opentelemetry.io/otel/exporters/otlp/otlpmetric/otlpmetricgrpc`
+  - [x] `go.opentelemetry.io/otel/sdk/trace`
+  - [x] `go.opentelemetry.io/otel/sdk/metric`
+- [x] Initialize OpenTelemetry SDK in `main.go`
+- [x] Configure OTLP exporter
+- [x] Add automatic instrumentation:
+  - [x] HTTP server middleware
+  - [x] MongoDB instrumentation
 - [ ] Add custom spans for business logic
 - [ ] Add custom metrics:
   - [ ] Request counter
   - [ ] Request duration histogram
   - [ ] Error counter
 - [ ] Add structured logging with trace context
-- [ ] Configure resource attributes (service name, version, environment)
+- [x] Configure resource attributes (service name, version, environment)
 
 **Deliverables:**
 - Fully instrumented API sending telemetry to OTLP Collector

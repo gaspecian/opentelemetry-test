@@ -22,9 +22,11 @@ services:
       - "8080:8080"
     environment:
       MONGODB_URI: mongodb://admin:password@mongodb:27017/apidb?authSource=admin
-      OTEL_EXPORTER_OTLP_ENDPOINT: http://host.docker.internal:4317
+      OTEL_EXPORTER_OTLP_ENDPOINT: host.docker.internal:4317
       SERVICE_NAME: api-sample
       SERVICE_VERSION: 1.0.0
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     depends_on:
       - mongodb
     networks:
