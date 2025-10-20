@@ -154,15 +154,15 @@ Create Locust tests to generate transaction volume for tracing.
 Connect all components and verify the complete system.
 
 **Tasks:**
-- [ ] Start monitoring stack (`monitoring-setup`)
-- [ ] Start application stack (`api-sample`)
-- [ ] Verify service connectivity
-- [ ] Run Locust performance tests to generate traffic
-- [ ] Verify traces in Jaeger UI
-- [ ] Verify metrics in Prometheus UI
-- [ ] Test all CRUD operations
-- [ ] Verify trace propagation through all layers
-- [ ] Check error scenarios and their telemetry
+- [x] Start monitoring stack (`monitoring-setup`)
+- [x] Start application stack (`api-sample`)
+- [x] Verify service connectivity
+- [x] Run Locust performance tests to generate traffic
+- [x] Verify traces in Jaeger UI
+- [x] Verify metrics in Prometheus UI
+- [x] Test all CRUD operations
+- [x] Verify trace propagation through all layers
+- [x] Check error scenarios and their telemetry
 
 **Deliverables:**
 - Fully functional OpenTelemetry PoC
