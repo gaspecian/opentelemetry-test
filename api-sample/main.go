@@ -22,6 +22,13 @@ func main() {
 
 	log.Println("OpenTelemetry initialized")
 
+	metrics, err := config.InitMetrics()
+	if err != nil {
+		log.Fatal("Failed to initialize metrics:", err)
+	}
+
+	log.Println("Metrics initialized")
+
 	db, err := database.Connect(cfg.MongoURI)
 	if err != nil {
 		log.Fatal("Failed to connect to MongoDB:", err)
@@ -30,7 +37,7 @@ func main() {
 
 	log.Println("Connected to MongoDB")
 
-	userHandler := handlers.NewUserHandler(db)
+	userHandler := handlers.NewUserHandler(db, metrics)
 
 	router := mux.NewRouter()
 	router.Use(otelmux.Middleware(cfg.ServiceName))

@@ -115,12 +115,12 @@ Add observability to the application.
 - [x] Add automatic instrumentation:
   - [x] HTTP server middleware
   - [x] MongoDB instrumentation
-- [ ] Add custom spans for business logic
-- [ ] Add custom metrics:
-  - [ ] Request counter
-  - [ ] Request duration histogram
-  - [ ] Error counter
-- [ ] Add structured logging with trace context
+- [x] Add custom spans for business logic
+- [x] Add custom metrics:
+  - [x] Request counter
+  - [x] Request duration histogram
+  - [x] Error counter
+- [x] Add structured logging with trace context
 - [x] Configure resource attributes (service name, version, environment)
 
 **Deliverables:**
