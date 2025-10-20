@@ -55,6 +55,7 @@ curl http://localhost:8080/users
 ### Access UIs
 - **Jaeger (Traces):** http://localhost:16686
 - **Prometheus (Metrics):** http://localhost:9090
+- **Grafana (Dashboards):** http://localhost:3000 (admin/admin)
 - **API:** http://localhost:8080
 
 ## 📊 Features
@@ -85,6 +86,7 @@ curl http://localhost:8080/users
 
 | Document | Description |
 |----------|-------------|
+| [Adding Applications](docs/ADDING_APPLICATIONS.md) | **How to add new apps to monitoring** |
 | [Implementation Plan](docs/IMPLEMENTATION_PLAN.md) | Step-by-step implementation guide |
 | [Configuration](docs/CONFIGURATION.md) | Detailed configuration reference |
 | [Usage Examples](docs/USAGE_EXAMPLES.md) | API usage and observability workflows |
@@ -214,7 +216,7 @@ curl -s "http://localhost:9090/api/v1/query?query=rate(http_server_errors_total[
 
 ## 🔜 Next Steps
 
-- [ ] Add Grafana dashboards
+- [x] Add Grafana dashboards
 - [ ] Implement sampling strategies
 - [ ] Add alerting rules
 - [ ] Production hardening (TLS, auth)
