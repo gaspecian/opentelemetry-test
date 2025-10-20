@@ -33,7 +33,7 @@
       "id": 1,
       "title": "CPU Usage",
       "type": "gauge",
-      "gridPos": {"h": 8, "w": 6, "x": 0, "y": 0},
+      "gridPos": {"h": 6, "w": 6, "x": 0, "y": 0},
       "targets": [
         {
           "expr": "rate(container_cpu_usage_seconds_total{image=~\"$application\"}[5m]) * 100",
@@ -58,7 +58,7 @@
       "id": 2,
       "title": "Memory Usage",
       "type": "gauge",
-      "gridPos": {"h": 8, "w": 6, "x": 6, "y": 0},
+      "gridPos": {"h": 6, "w": 6, "x": 6, "y": 0},
       "targets": [
         {
           "expr": "container_memory_working_set_bytes{image=~\"$application\"} / 1024 / 1024",
@@ -82,28 +82,35 @@
     {
       "id": 3,
       "title": "Transaction Rate",
-      "type": "graph",
-      "gridPos": {"h": 8, "w": 6, "x": 12, "y": 0},
+      "type": "stat",
+      "gridPos": {"h": 6, "w": 6, "x": 12, "y": 0},
       "targets": [
         {
           "expr": "sum(rate(http_server_requests_total[1m]))",
-          "legendFormat": "Requests/sec",
           "refId": "A"
         }
       ],
-      "yaxes": [
-        {"format": "reqps", "label": "Requests/sec"},
-        {"format": "short"}
-      ]
+      "fieldConfig": {
+        "defaults": {
+          "unit": "reqps",
+          "color": {"mode": "thresholds"},
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"value": 0, "color": "green"}
+            ]
+          }
+        }
+      }
     },
     {
       "id": 4,
       "title": "Apdex Score",
       "type": "gauge",
-      "gridPos": {"h": 8, "w": 6, "x": 18, "y": 0},
+      "gridPos": {"h": 6, "w": 6, "x": 18, "y": 0},
       "targets": [
         {
-          "expr": "(sum(rate(http_server_duration_milliseconds_bucket{le=\"100\"}[5m])) + sum(rate(http_server_duration_milliseconds_bucket{le=\"400\"}[5m])) / 2) / sum(rate(http_server_duration_milliseconds_count[5m]))",
+          "expr": "(sum(rate(http_server_duration_milliseconds_bucket{le=\"100\"}[5m])) + (sum(rate(http_server_duration_milliseconds_bucket{le=\"400\"}[5m])) - sum(rate(http_server_duration_milliseconds_bucket{le=\"100\"}[5m]))) / 2) / sum(rate(http_server_duration_milliseconds_count[5m]))",
           "refId": "A"
         }
       ],
@@ -111,6 +118,7 @@
         "defaults": {
           "min": 0,
           "max": 1,
+          "decimals": 2,
           "thresholds": {
             "mode": "absolute",
             "steps": [
@@ -125,9 +133,49 @@
     },
     {
       "id": 5,
-      "title": "Requests by Method and Status",
+      "title": "CPU Usage Over Time",
       "type": "graph",
-      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 8},
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 6},
+      "targets": [
+        {
+          "expr": "rate(container_cpu_usage_seconds_total{image=~\"$application\"}[5m]) * 100",
+          "legendFormat": "CPU %",
+          "refId": "A"
+        }
+      ],
+      "yaxes": [
+        {"format": "percent", "label": "CPU Usage"},
+        {"format": "short"}
+      ],
+      "lines": true,
+      "fill": 1,
+      "linewidth": 2
+    },
+    {
+      "id": 6,
+      "title": "Memory Usage Over Time",
+      "type": "graph",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 6},
+      "targets": [
+        {
+          "expr": "container_memory_working_set_bytes{image=~\"$application\"} / 1024 / 1024",
+          "legendFormat": "Memory (MiB)",
+          "refId": "A"
+        }
+      ],
+      "yaxes": [
+        {"format": "decmbytes", "label": "Memory"},
+        {"format": "short"}
+      ],
+      "lines": true,
+      "fill": 1,
+      "linewidth": 2
+    },
+    {
+      "id": 7,
+      "title": "Transaction Rate (req/s)",
+      "type": "graph",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 14},
       "targets": [
         {
           "expr": "sum by (http_method, http_status_code) (rate(http_server_requests_total[1m]))",
@@ -136,35 +184,52 @@
         }
       ],
       "yaxes": [
-        {"format": "short", "label": "Requests/sec"},
+        {"format": "reqps", "label": "Requests/sec"},
         {"format": "short"}
-      ]
+      ],
+      "lines": true,
+      "fill": 1,
+      "linewidth": 2,
+      "legend": {
+        "show": true,
+        "values": true,
+        "current": true
+      }
     },
     {
-      "id": 6,
-      "title": "Error Rate",
+      "id": 8,
+      "title": "Error Rate (errors/s)",
       "type": "graph",
-      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8},
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 14},
       "targets": [
         {
           "expr": "sum by (http_status_code) (rate(http_server_errors_total[1m]))",
-          "legendFormat": "{{http_status_code}}",
+          "legendFormat": "Status {{http_status_code}}",
           "refId": "A"
         }
       ],
       "yaxes": [
         {"format": "short", "label": "Errors/sec"},
         {"format": "short"}
-      ]
+      ],
+      "lines": true,
+      "fill": 1,
+      "linewidth": 2,
+      "legend": {
+        "show": true,
+        "values": true,
+        "current": true
+      }
     },
     {
-      "id": 7,
+      "id": 9,
       "title": "Error Logs",
       "type": "logs",
-      "gridPos": {"h": 10, "w": 24, "x": 0, "y": 16},
+      "datasource": "Loki",
+      "gridPos": {"h": 10, "w": 24, "x": 0, "y": 22},
       "targets": [
         {
-          "expr": "{container_name=~\"$application\"} |~ \"(?i)(error|ERROR|TraceID)\"",
+          "expr": "{container_name=\"api-sample\"} |~ `(?i)(error|ERROR|TraceID)`",
           "refId": "A"
         }
       ],
