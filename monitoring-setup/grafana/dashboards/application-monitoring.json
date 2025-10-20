@@ -31,9 +31,9 @@
   "panels": [
     {
       "id": 1,
-      "title": "CPU Usage Over Time",
+      "title": "CPU Usage",
       "type": "graph",
-      "gridPos": {"h": 9, "w": 12, "x": 0, "y": 0},
+      "gridPos": {"h": 8, "w": 8, "x": 0, "y": 0},
       "targets": [
         {
           "expr": "rate(container_cpu_usage_seconds_total{container_name=~\"$application\"}[5m]) * 100",
@@ -42,36 +42,20 @@
         }
       ],
       "yaxes": [
-        {
-          "format": "percent",
-          "label": "CPU Usage",
-          "show": true,
-          "min": 0
-        },
+        {"format": "percent", "label": "CPU", "show": true, "min": 0},
         {"format": "short", "show": false}
       ],
       "xaxis": {"show": true},
       "lines": true,
       "fill": 1,
       "linewidth": 2,
-      "legend": {
-        "show": true,
-        "values": true,
-        "current": true,
-        "avg": true,
-        "max": true
-      },
-      "grid": {
-        "leftLogBase": 1,
-        "leftMax": null,
-        "leftMin": 0
-      }
+      "legend": {"show": true, "values": true, "current": true, "avg": true, "max": true}
     },
     {
       "id": 2,
-      "title": "Memory Usage Over Time",
+      "title": "Memory Usage",
       "type": "graph",
-      "gridPos": {"h": 9, "w": 12, "x": 12, "y": 0},
+      "gridPos": {"h": 8, "w": 8, "x": 8, "y": 0},
       "targets": [
         {
           "expr": "container_memory_working_set_bytes{container_name=~\"$application\"} / 1024 / 1024",
@@ -80,113 +64,198 @@
         }
       ],
       "yaxes": [
-        {
-          "format": "decmbytes",
-          "label": "Memory",
-          "show": true,
-          "min": 0
-        },
+        {"format": "decmbytes", "label": "Memory", "show": true, "min": 0},
         {"format": "short", "show": false}
       ],
       "xaxis": {"show": true},
       "lines": true,
       "fill": 1,
       "linewidth": 2,
-      "legend": {
-        "show": true,
-        "values": true,
-        "current": true,
-        "avg": true,
-        "max": true
-      },
-      "grid": {
-        "leftLogBase": 1,
-        "leftMax": null,
-        "leftMin": 0
-      }
+      "legend": {"show": true, "values": true, "current": true, "avg": true, "max": true}
     },
     {
       "id": 3,
-      "title": "Transaction Rate (req/s)",
-      "type": "graph",
-      "gridPos": {"h": 9, "w": 12, "x": 0, "y": 9},
+      "title": "Active Requests",
+      "type": "stat",
+      "gridPos": {"h": 8, "w": 8, "x": 16, "y": 0},
       "targets": [
         {
-          "expr": "sum by (http_method, http_status_code) (rate(http_server_requests_total[1m]))",
-          "legendFormat": "{{http_method}} - {{http_status_code}}",
+          "expr": "http_server_active_requests_gauge",
           "refId": "A"
         }
       ],
-      "yaxes": [
-        {
-          "format": "reqps",
-          "label": "Requests/sec",
-          "show": true,
-          "min": 0
-        },
-        {"format": "short", "show": false}
-      ],
-      "xaxis": {"show": true},
-      "lines": true,
-      "fill": 1,
-      "linewidth": 2,
-      "legend": {
-        "show": true,
-        "values": true,
-        "current": true,
-        "avg": true,
-        "max": true
+      "options": {
+        "graphMode": "area",
+        "colorMode": "value",
+        "textMode": "value_and_name"
       },
-      "grid": {
-        "leftLogBase": 1,
-        "leftMax": null,
-        "leftMin": 0
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {"value": 0, "color": "green"},
+              {"value": 10, "color": "yellow"},
+              {"value": 50, "color": "red"}
+            ]
+          }
+        }
       }
     },
     {
       "id": 4,
-      "title": "Error Rate (errors/s)",
+      "title": "Request Rate by Endpoint",
       "type": "graph",
-      "gridPos": {"h": 9, "w": 12, "x": 12, "y": 9},
+      "gridPos": {"h": 9, "w": 12, "x": 0, "y": 8},
       "targets": [
         {
-          "expr": "sum by (http_status_code) (rate(http_server_errors_total[1m]))",
-          "legendFormat": "Status {{http_status_code}}",
+          "expr": "sum by (http_endpoint, http_status_code) (rate(http_server_requests_total[1m]))",
+          "legendFormat": "{{http_endpoint}} - {{http_status_code}}",
           "refId": "A"
         }
       ],
       "yaxes": [
-        {
-          "format": "short",
-          "label": "Errors/sec",
-          "show": true,
-          "min": 0
-        },
+        {"format": "reqps", "label": "Requests/sec", "show": true, "min": 0},
         {"format": "short", "show": false}
       ],
       "xaxis": {"show": true},
       "lines": true,
       "fill": 1,
       "linewidth": 2,
-      "legend": {
-        "show": true,
-        "values": true,
-        "current": true,
-        "avg": true,
-        "max": true
-      },
-      "grid": {
-        "leftLogBase": 1,
-        "leftMax": null,
-        "leftMin": 0
-      }
+      "legend": {"show": true, "values": true, "current": true, "avg": true, "max": true}
     },
     {
       "id": 5,
+      "title": "Response Time (P50, P95, P99)",
+      "type": "graph",
+      "gridPos": {"h": 9, "w": 12, "x": 12, "y": 8},
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, sum(rate(http_server_duration_milliseconds_bucket[5m])) by (le))",
+          "legendFormat": "P50",
+          "refId": "A"
+        },
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(http_server_duration_milliseconds_bucket[5m])) by (le))",
+          "legendFormat": "P95",
+          "refId": "B"
+        },
+        {
+          "expr": "histogram_quantile(0.99, sum(rate(http_server_duration_milliseconds_bucket[5m])) by (le))",
+          "legendFormat": "P99",
+          "refId": "C"
+        }
+      ],
+      "yaxes": [
+        {"format": "ms", "label": "Latency", "show": true, "min": 0},
+        {"format": "short", "show": false}
+      ],
+      "xaxis": {"show": true},
+      "lines": true,
+      "fill": 0,
+      "linewidth": 2,
+      "legend": {"show": true, "values": true, "current": true, "avg": true, "max": true}
+    },
+    {
+      "id": 6,
+      "title": "Error Rate",
+      "type": "graph",
+      "gridPos": {"h": 9, "w": 12, "x": 0, "y": 17},
+      "targets": [
+        {
+          "expr": "sum by (http_endpoint, http_status_code) (rate(http_server_errors_total[1m]))",
+          "legendFormat": "{{http_endpoint}} - {{http_status_code}}",
+          "refId": "A"
+        }
+      ],
+      "yaxes": [
+        {"format": "short", "label": "Errors/sec", "show": true, "min": 0},
+        {"format": "short", "show": false}
+      ],
+      "xaxis": {"show": true},
+      "lines": true,
+      "fill": 1,
+      "linewidth": 2,
+      "legend": {"show": true, "values": true, "current": true, "avg": true, "max": true}
+    },
+    {
+      "id": 7,
+      "title": "Database Query Rate",
+      "type": "graph",
+      "gridPos": {"h": 9, "w": 12, "x": 12, "y": 17},
+      "targets": [
+        {
+          "expr": "sum by (db_operation) (rate(db_queries_total[1m]))",
+          "legendFormat": "{{db_operation}}",
+          "refId": "A"
+        }
+      ],
+      "yaxes": [
+        {"format": "ops", "label": "Queries/sec", "show": true, "min": 0},
+        {"format": "short", "show": false}
+      ],
+      "xaxis": {"show": true},
+      "lines": true,
+      "fill": 1,
+      "linewidth": 2,
+      "legend": {"show": true, "values": true, "current": true, "avg": true, "max": true}
+    },
+    {
+      "id": 8,
+      "title": "Database Query Latency (P95)",
+      "type": "graph",
+      "gridPos": {"h": 9, "w": 12, "x": 0, "y": 26},
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum by (db_operation, le) (rate(db_query_duration_milliseconds_bucket[5m])))",
+          "legendFormat": "{{db_operation}}",
+          "refId": "A"
+        }
+      ],
+      "yaxes": [
+        {"format": "ms", "label": "Latency", "show": true, "min": 0},
+        {"format": "short", "show": false}
+      ],
+      "xaxis": {"show": true},
+      "lines": true,
+      "fill": 1,
+      "linewidth": 2,
+      "legend": {"show": true, "values": true, "current": true, "avg": true, "max": true}
+    },
+    {
+      "id": 9,
+      "title": "Business Metrics",
+      "type": "graph",
+      "gridPos": {"h": 9, "w": 12, "x": 12, "y": 26},
+      "targets": [
+        {
+          "expr": "rate(users_created_total[5m]) * 60",
+          "legendFormat": "Users Created/min",
+          "refId": "A"
+        },
+        {
+          "expr": "rate(users_deleted_total[5m]) * 60",
+          "legendFormat": "Users Deleted/min",
+          "refId": "B"
+        }
+      ],
+      "yaxes": [
+        {"format": "short", "label": "Operations/min", "show": true, "min": 0},
+        {"format": "short", "show": false}
+      ],
+      "xaxis": {"show": true},
+      "lines": true,
+      "fill": 1,
+      "linewidth": 2,
+      "legend": {"show": true, "values": true, "current": true, "avg": true, "max": true}
+    },
+    {
+      "id": 10,
       "title": "Error Logs",
       "type": "logs",
       "datasource": "Loki",
-      "gridPos": {"h": 10, "w": 24, "x": 0, "y": 18},
+      "gridPos": {"h": 10, "w": 24, "x": 0, "y": 35},
       "targets": [
         {
           "expr": "{container_name=\"$application\"} |~ `(?i)(error|ERROR|TraceID)`",
