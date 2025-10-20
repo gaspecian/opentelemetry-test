@@ -52,6 +52,20 @@ All metrics are exported to Prometheus via OTLP Collector:
 - Create dashboards
 - Set up alerts
 
+### Grafana (Dashboards)
+- URL: http://localhost:3000 (admin/admin)
+- Pre-configured Application Monitoring dashboard
+- Category-based container filtering
+- CPU and Memory usage visualization
+- Transaction and Error rate graphs
+- Log correlation with TraceID
+
+### Loki (Logs)
+- URL: http://localhost:3100
+- Centralized log aggregation
+- Integrated with Grafana
+- TraceID correlation support
+
 ### OTLP Collector
 - gRPC endpoint: localhost:4317
 - HTTP endpoint: localhost:4318

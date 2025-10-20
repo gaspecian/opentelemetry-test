@@ -27,7 +27,18 @@ A comprehensive implementation of OpenTelemetry for distributed tracing, metrics
 ┌─────────┐ ┌────────────┐
 │ Jaeger  │ │ Prometheus │
 │  16686  │ │    9090    │
-└─────────┘ └────────────┘
+└─────────┘ └──────┬─────┘
+                   │
+            ┌──────┴──────┐
+            ↓             ↓
+       ┌─────────┐   ┌────────┐
+       │ Grafana │   │ Loki   │
+       │  3000   │   │  3100  │
+       └─────────┘   └────────┘
+                         ↑
+                    ┌────┴────┐
+                    │Promtail │
+                    └─────────┘
 ```
 
 ## 🚀 Quick Start
@@ -110,6 +121,13 @@ curl http://localhost:8080/users
 - `http_server_requests_total` - Request counter
 - `http_server_duration_milliseconds` - Latency histogram
 - `http_server_errors_total` - Error counter
+
+### ✅ Grafana Dashboards
+- Application monitoring dashboard
+- Category-based container filtering
+- CPU and Memory usage graphs
+- Transaction and Error rate visualization
+- Log correlation with TraceID
 
 ### ✅ Structured Logging
 - Trace context in all logs
@@ -209,13 +227,18 @@ curl -s "http://localhost:9090/api/v1/query?query=rate(http_server_errors_total[
 │   ├── handlers/            # HTTP handlers
 │   ├── models/              # Data models
 │   ├── testing/             # Locust load tests
+│   ├── promtail-config.yaml # Log shipping config
 │   ├── Dockerfile
 │   └── docker-compose.yml
 ├── monitoring-setup/        # Observability stack
+│   ├── grafana/
+│   │   └── dashboards/      # Grafana dashboards
 │   ├── otel-collector-config.yaml
-│   ├── prometheus.yml
+│   ├── prometheus.yaml
 │   └── docker-compose.yml
-└── docs/                    # Documentation
+├── docs/                    # Documentation
+├── Makefile                 # Project automation
+└── .gitignore
 ```
 
 ## 🔧 Technology Stack
@@ -230,6 +253,10 @@ curl -s "http://localhost:9090/api/v1/query?query=rate(http_server_errors_total[
 - OpenTelemetry Collector
 - Jaeger (distributed tracing)
 - Prometheus (metrics)
+- Grafana (dashboards)
+- Loki (log aggregation)
+- Promtail (log shipping)
+- cAdvisor (container metrics)
 
 **Testing:**
 - Locust (load testing)
@@ -243,7 +270,11 @@ curl -s "http://localhost:9090/api/v1/query?query=rate(http_server_errors_total[
 | OTLP Collector | 33 MiB | 0.03% |
 | Jaeger | 20 MiB | 0.01% |
 | Prometheus | 23 MiB | 0.00% |
-| **Total** | **164 MiB** | **0.27%** |
+| Grafana | 45 MiB | 0.02% |
+| Loki | 15 MiB | 0.01% |
+| Promtail | 10 MiB | 0.01% |
+| cAdvisor | 30 MiB | 0.05% |
+| **Total** | **~264 MiB** | **~0.36%** |
 
 ## 🎓 Key Learnings
 
@@ -252,6 +283,7 @@ curl -s "http://localhost:9090/api/v1/query?query=rate(http_server_errors_total[
 3. **Metric Timing:** Near-real-time (10-25s delay)
 4. **Docker Networking:** Platform-specific considerations
 5. **OpenTelemetry APIs:** Still evolving, check latest docs
+6. **Category-Based Filtering:** Simplifies multi-app monitoring
 
 ## 🔜 Next Steps
 
