@@ -16,14 +16,14 @@
         "name": "application",
         "type": "query",
         "datasource": "Prometheus",
-        "query": "label_values(image)",
+        "query": "label_values(container_name)",
         "label": "Application",
         "refresh": 1,
         "multi": false,
         "includeAll": false,
         "current": {
-          "text": "api-sample-api",
-          "value": "api-sample-api"
+          "text": "api",
+          "value": "api"
         }
       }
     ]
@@ -31,151 +31,85 @@
   "panels": [
     {
       "id": 1,
-      "title": "CPU Usage",
-      "type": "gauge",
-      "gridPos": {"h": 6, "w": 6, "x": 0, "y": 0},
-      "targets": [
-        {
-          "expr": "rate(container_cpu_usage_seconds_total{image=~\"$application\"}[5m]) * 100",
-          "refId": "A"
-        }
-      ],
-      "fieldConfig": {
-        "defaults": {
-          "unit": "percent",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {"value": 0, "color": "green"},
-              {"value": 70, "color": "yellow"},
-              {"value": 85, "color": "red"}
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": 2,
-      "title": "Memory Usage",
-      "type": "gauge",
-      "gridPos": {"h": 6, "w": 6, "x": 6, "y": 0},
-      "targets": [
-        {
-          "expr": "container_memory_working_set_bytes{image=~\"$application\"} / 1024 / 1024",
-          "refId": "A"
-        }
-      ],
-      "fieldConfig": {
-        "defaults": {
-          "unit": "decmbytes",
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {"value": 0, "color": "green"},
-              {"value": 100, "color": "yellow"},
-              {"value": 200, "color": "red"}
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": 3,
-      "title": "Transaction Rate",
-      "type": "stat",
-      "gridPos": {"h": 6, "w": 6, "x": 12, "y": 0},
-      "targets": [
-        {
-          "expr": "sum(rate(http_server_requests_total[1m]))",
-          "refId": "A"
-        }
-      ],
-      "fieldConfig": {
-        "defaults": {
-          "unit": "reqps",
-          "color": {"mode": "thresholds"},
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {"value": 0, "color": "green"}
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": 4,
-      "title": "Apdex Score",
-      "type": "gauge",
-      "gridPos": {"h": 6, "w": 6, "x": 18, "y": 0},
-      "targets": [
-        {
-          "expr": "(sum(rate(http_server_duration_milliseconds_bucket{le=\"100\"}[5m])) + (sum(rate(http_server_duration_milliseconds_bucket{le=\"400\"}[5m])) - sum(rate(http_server_duration_milliseconds_bucket{le=\"100\"}[5m]))) / 2) / sum(rate(http_server_duration_milliseconds_count[5m]))",
-          "refId": "A"
-        }
-      ],
-      "fieldConfig": {
-        "defaults": {
-          "min": 0,
-          "max": 1,
-          "decimals": 2,
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {"value": 0, "color": "red"},
-              {"value": 0.7, "color": "orange"},
-              {"value": 0.85, "color": "yellow"},
-              {"value": 0.94, "color": "green"}
-            ]
-          }
-        }
-      }
-    },
-    {
-      "id": 5,
       "title": "CPU Usage Over Time",
       "type": "graph",
-      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 6},
+      "gridPos": {"h": 9, "w": 12, "x": 0, "y": 0},
       "targets": [
         {
-          "expr": "rate(container_cpu_usage_seconds_total{image=~\"$application\"}[5m]) * 100",
+          "expr": "rate(container_cpu_usage_seconds_total{container_name=~\"$application\"}[5m]) * 100",
           "legendFormat": "CPU %",
           "refId": "A"
         }
       ],
       "yaxes": [
-        {"format": "percent", "label": "CPU Usage"},
-        {"format": "short"}
+        {
+          "format": "percent",
+          "label": "CPU Usage",
+          "show": true,
+          "min": 0
+        },
+        {"format": "short", "show": false}
       ],
+      "xaxis": {"show": true},
       "lines": true,
       "fill": 1,
-      "linewidth": 2
+      "linewidth": 2,
+      "legend": {
+        "show": true,
+        "values": true,
+        "current": true,
+        "avg": true,
+        "max": true
+      },
+      "grid": {
+        "leftLogBase": 1,
+        "leftMax": null,
+        "leftMin": 0
+      }
     },
     {
-      "id": 6,
+      "id": 2,
       "title": "Memory Usage Over Time",
       "type": "graph",
-      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 6},
+      "gridPos": {"h": 9, "w": 12, "x": 12, "y": 0},
       "targets": [
         {
-          "expr": "container_memory_working_set_bytes{image=~\"$application\"} / 1024 / 1024",
+          "expr": "container_memory_working_set_bytes{container_name=~\"$application\"} / 1024 / 1024",
           "legendFormat": "Memory (MiB)",
           "refId": "A"
         }
       ],
       "yaxes": [
-        {"format": "decmbytes", "label": "Memory"},
-        {"format": "short"}
+        {
+          "format": "decmbytes",
+          "label": "Memory",
+          "show": true,
+          "min": 0
+        },
+        {"format": "short", "show": false}
       ],
+      "xaxis": {"show": true},
       "lines": true,
       "fill": 1,
-      "linewidth": 2
+      "linewidth": 2,
+      "legend": {
+        "show": true,
+        "values": true,
+        "current": true,
+        "avg": true,
+        "max": true
+      },
+      "grid": {
+        "leftLogBase": 1,
+        "leftMax": null,
+        "leftMin": 0
+      }
     },
     {
-      "id": 7,
+      "id": 3,
       "title": "Transaction Rate (req/s)",
       "type": "graph",
-      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 14},
+      "gridPos": {"h": 9, "w": 12, "x": 0, "y": 9},
       "targets": [
         {
           "expr": "sum by (http_method, http_status_code) (rate(http_server_requests_total[1m]))",
@@ -184,23 +118,36 @@
         }
       ],
       "yaxes": [
-        {"format": "reqps", "label": "Requests/sec"},
-        {"format": "short"}
+        {
+          "format": "reqps",
+          "label": "Requests/sec",
+          "show": true,
+          "min": 0
+        },
+        {"format": "short", "show": false}
       ],
+      "xaxis": {"show": true},
       "lines": true,
       "fill": 1,
       "linewidth": 2,
       "legend": {
         "show": true,
         "values": true,
-        "current": true
+        "current": true,
+        "avg": true,
+        "max": true
+      },
+      "grid": {
+        "leftLogBase": 1,
+        "leftMax": null,
+        "leftMin": 0
       }
     },
     {
-      "id": 8,
+      "id": 4,
       "title": "Error Rate (errors/s)",
       "type": "graph",
-      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 14},
+      "gridPos": {"h": 9, "w": 12, "x": 12, "y": 9},
       "targets": [
         {
           "expr": "sum by (http_status_code) (rate(http_server_errors_total[1m]))",
@@ -209,27 +156,40 @@
         }
       ],
       "yaxes": [
-        {"format": "short", "label": "Errors/sec"},
-        {"format": "short"}
+        {
+          "format": "short",
+          "label": "Errors/sec",
+          "show": true,
+          "min": 0
+        },
+        {"format": "short", "show": false}
       ],
+      "xaxis": {"show": true},
       "lines": true,
       "fill": 1,
       "linewidth": 2,
       "legend": {
         "show": true,
         "values": true,
-        "current": true
+        "current": true,
+        "avg": true,
+        "max": true
+      },
+      "grid": {
+        "leftLogBase": 1,
+        "leftMax": null,
+        "leftMin": 0
       }
     },
     {
-      "id": 9,
+      "id": 5,
       "title": "Error Logs",
       "type": "logs",
       "datasource": "Loki",
-      "gridPos": {"h": 10, "w": 24, "x": 0, "y": 22},
+      "gridPos": {"h": 10, "w": 24, "x": 0, "y": 18},
       "targets": [
         {
-          "expr": "{container_name=\"api-sample\"} |~ `(?i)(error|ERROR|TraceID)`",
+          "expr": "{container_name=\"$application\"} |~ `(?i)(error|ERROR|TraceID)`",
           "refId": "A"
         }
       ],
