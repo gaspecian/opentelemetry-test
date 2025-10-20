@@ -36,9 +36,24 @@ A comprehensive implementation of OpenTelemetry for distributed tracing, metrics
 - Docker & Docker Compose
 - Go 1.24+ (for local development)
 - Python 3.x (for load testing)
+- Make (optional, for convenience)
 
 ### Start the System
 
+**Using Makefile (Recommended):**
+```bash
+# Start everything
+make start
+
+# Or use individual commands
+make monitoring  # Start monitoring stack
+make api        # Start API
+
+# View help
+make help
+```
+
+**Manual Start:**
 ```bash
 # 1. Start monitoring stack
 cd monitoring-setup
@@ -57,6 +72,30 @@ curl http://localhost:8080/users
 - **Prometheus (Metrics):** http://localhost:9090
 - **Grafana (Dashboards):** http://localhost:3000 (admin/admin)
 - **API:** http://localhost:8080
+
+### Makefile Commands
+
+**Lifecycle:**
+- `make start` - Start all services
+- `make stop` - Stop all services
+- `make restart` - Restart all services
+- `make clean` - Stop and remove volumes
+
+**Monitoring:**
+- `make status` - Show service status
+- `make health` - Check health of all services
+- `make logs SERVICE=<name>` - Show logs
+- `make metrics` - Show current metrics
+
+**Testing:**
+- `make test` - Run load tests
+- `make test-api` - Test API endpoints
+- `make traffic` - Generate test traffic
+
+**Utilities:**
+- `make dashboard` - Open Grafana
+- `make jaeger` - Open Jaeger
+- `make help` - Show all commands
 
 ## 📊 Features
 
