@@ -1,0 +1,19 @@
+2025/10/20 10:43:12 Setting up OTLP exporter to collector
+2025/10/20 10:43:12 ✅ OTLP tracer configured - sending traces to collector
+2025/10/20 10:43:12 Connected to MongoDB
+2025/10/20 10:43:12 Server starting on :5032
+2025/10/20 10:43:20 🔍 Manual span created for getTodos
+2025/10/20 10:43:30 traces export: context deadline exceeded: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing: dial tcp [::1]:4317: connect: connection refused"
+2025/10/20 10:43:40 traces export: context deadline exceeded: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing: dial tcp [::1]:4317: connect: connection refused"
+2025/10/20 10:44:06 traces export: context deadline exceeded: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing: dial tcp [::1]:4317: connect: connection refused"
+2025/10/20 10:44:16 traces export: context deadline exceeded: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing: dial tcp [::1]:4317: connect: connection refused"
+2025/10/20 10:44:26 traces export: context deadline exceeded: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing: dial tcp [::1]:4317: connect: connection refused"
+2025/10/20 10:44:36 traces export: context deadline exceeded: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing: dial tcp [::1]:4317: connect: connection refused"
+2025/10/20 10:44:46 traces export: context deadline exceeded: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing: dial tcp [::1]:4317: connect: connection refused"
+2025/10/20 10:44:56 traces export: context deadline exceeded: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing: dial tcp [::1]:4317: connect: connection refused"
+2025/10/20 10:45:07 traces export: context deadline exceeded: rpc error: code = Unavailable desc = connection error: desc = "transport: Error while dialing: dial tcp [::1]:4317: connect: connection refused"
+2025/10/20 10:45:07 🔍 Manual span created for getTodos
+2025/10/20 10:45:07 🔍 Manual span created for getTodos
+2025/10/20 10:45:08 🔍 Manual span created for getTodos
+2025/10/20 10:45:10 🔍 Manual span created for getTodos
+2025/10/20 10:45:10 🔍 Manual span created for getTodos
