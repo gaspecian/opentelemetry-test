@@ -100,7 +100,6 @@ Current resource usage is minimal. Headroom for:
 ## Comparison Baseline
 
 This resource consumption serves as a baseline for comparing with:
-- ELK Stack implementation (future)
 - Other observability solutions
 - Different deployment configurations
 

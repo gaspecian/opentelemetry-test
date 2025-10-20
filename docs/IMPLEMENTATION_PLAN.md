@@ -179,40 +179,10 @@ Document findings and prepare for comparison.
 - [x] Capture screenshots of Jaeger and Prometheus UIs
 - [x] Document resource consumption (CPU, memory)
 - [x] Note implementation challenges
-- [x] Prepare comparison criteria for ELK evaluation
 
 **Deliverables:**
 - Complete documentation
-- Baseline metrics for comparison
-
----
-
-## Phase 5: ELK Comparison (Future)
-
-### Step 9: ELK Stack Implementation
-Implement equivalent monitoring with ELK stack.
-
-**Tasks:**
-- [ ] Set up Elasticsearch
-- [ ] Set up Logstash
-- [ ] Set up Kibana
-- [ ] Instrument API for ELK
-- [ ] Configure log shipping
-- [ ] Create Kibana dashboards
-
----
-
-### Step 10: Comparative Analysis
-Compare both implementations.
-
-**Tasks:**
-- [ ] Compare implementation complexity
-- [ ] Compare resource usage
-- [ ] Compare feature completeness
-- [ ] Compare query capabilities
-- [ ] Compare visualization options
-- [ ] Document pros and cons
-- [ ] Make recommendation
+- Baseline metrics
 
 ---
 
@@ -248,6 +218,9 @@ Compare both implementations.
 - Phase 1: 1 day
 - Phase 2: 1 day
 - Phase 3: 2-3 days
+- Phase 4: 1 day
+
+**Total:** 5-6 days
 - Phase 4: 1 day
 - **Total**: ~5-6 days for OpenTelemetry PoC
 
