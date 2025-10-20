@@ -13,15 +13,15 @@ Create the OpenTelemetry monitoring infrastructure.
 
 **Tasks:**
 - [x] Create `monitoring-setup` folder structure
-- [ ] Create `docker-compose.yml` with:
-  - [ ] OTLP Collector service
-  - [ ] Jaeger service (all-in-one)
-  - [ ] Prometheus service
-- [ ] Create OTLP Collector configuration file (`otel-collector-config.yaml`)
-- [ ] Configure Prometheus scraping configuration
-- [ ] Set up Docker network for service communication
-- [ ] Define volume mounts for data persistence
-- [ ] Test monitoring stack startup
+- [x] Create `docker-compose.yml` with:
+  - [x] OTLP Collector service
+  - [x] Jaeger service (all-in-one)
+  - [x] Prometheus service
+- [x] Create OTLP Collector configuration file (`otel-collector-config.yaml`)
+- [x] Configure Prometheus scraping configuration
+- [x] Set up Docker network for service communication
+- [x] Define volume mounts for data persistence
+- [x] Test monitoring stack startup
 
 **Deliverables:**
 - Working monitoring stack accessible via:
