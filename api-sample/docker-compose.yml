@@ -36,6 +36,8 @@ services:
       options:
         max-size: "10m"
         max-file: "3"
+    labels:
+      - "monitor_category=application"
 
   promtail:
     image: grafana/promtail:latest

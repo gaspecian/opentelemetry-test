@@ -16,7 +16,7 @@
         "name": "application",
         "type": "query",
         "datasource": "Prometheus",
-        "query": "label_values(container_name)",
+        "query": "label_values(container_memory_working_set_bytes{monitor_category=\"application\"}, container_name)",
         "label": "Application",
         "refresh": 1,
         "multi": false,
