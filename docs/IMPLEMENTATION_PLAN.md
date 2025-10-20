@@ -69,9 +69,9 @@ Initialize the Go project with basic structure.
   - [x] `models/` - Data models
   - [x] `database/` - MongoDB connection
   - [x] `config/` - Configuration management
-- [ ] Install dependencies:
-  - [ ] MongoDB driver (`go.mongodb.org/mongo-driver`)
-  - [ ] HTTP router (e.g., `gorilla/mux` or `gin-gonic/gin`)
+- [x] Install dependencies:
+  - [x] MongoDB driver (`go.mongodb.org/mongo-driver`)
+  - [x] HTTP router (e.g., `gorilla/mux` or `gin-gonic/gin`)
   - [ ] OpenTelemetry SDK packages
 
 **Deliverables:**
@@ -83,16 +83,16 @@ Initialize the Go project with basic structure.
 Build the core API functionality.
 
 **Tasks:**
-- [ ] Define data model (e.g., User, Product, etc.)
-- [ ] Implement MongoDB connection and client
-- [ ] Create CRUD handlers:
-  - [ ] POST - Create resource
-  - [ ] GET - Read resource(s)
-  - [ ] PUT - Update resource
-  - [ ] DELETE - Delete resource
-- [ ] Set up HTTP routes
-- [ ] Implement error handling
-- [ ] Add input validation
+- [x] Define data model (e.g., User, Product, etc.)
+- [x] Implement MongoDB connection and client
+- [x] Create CRUD handlers:
+  - [x] POST - Create resource
+  - [x] GET - Read resource(s)
+  - [x] PUT - Update resource
+  - [x] DELETE - Delete resource
+- [x] Set up HTTP routes
+- [x] Implement error handling
+- [x] Add input validation
 - [ ] Test CRUD operations manually
 
 **Deliverables:**
