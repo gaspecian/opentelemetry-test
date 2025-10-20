@@ -1,0 +1,46 @@
+# Go
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+go.work
+vendor/
+
+# Docker
+.env
+.env.local
+docker-compose.override.yml
+
+# Logs
+*.log
+logs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Python (Locust)
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+venv/
+env/
+
+# Monitoring data
+monitoring-setup/prometheus/data/
+monitoring-setup/grafana/data/
+monitoring-setup/loki/data/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
