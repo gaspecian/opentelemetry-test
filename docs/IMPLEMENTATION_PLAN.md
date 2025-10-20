@@ -130,14 +130,34 @@ Add observability to the application.
 
 ## Phase 4: Integration & Testing (Both Teams)
 
-### Step 6: End-to-End Integration
+### Step 6: Create Performance Testing Setup
+Create Locust tests to generate transaction volume for tracing.
+
+**Tasks:**
+- [ ] Create `testing` folder in `api-sample`
+- [ ] Create `locustfile.py` with test scenarios:
+  - [ ] Create resource test
+  - [ ] Read resource test
+  - [ ] Update resource test
+  - [ ] Delete resource test
+  - [ ] Mixed workload test
+- [ ] Create `requirements.txt` for Locust dependencies
+- [ ] Create test execution script
+- [ ] Document how to run performance tests
+
+**Deliverables:**
+- Locust performance test suite for generating trace volume
+
+---
+
+### Step 7: End-to-End Integration
 Connect all components and verify the complete system.
 
 **Tasks:**
 - [ ] Start monitoring stack (`monitoring-setup`)
 - [ ] Start application stack (`api-sample`)
 - [ ] Verify service connectivity
-- [ ] Generate test traffic to API
+- [ ] Run Locust performance tests to generate traffic
 - [ ] Verify traces in Jaeger UI
 - [ ] Verify metrics in Prometheus UI
 - [ ] Test all CRUD operations
@@ -149,7 +169,7 @@ Connect all components and verify the complete system.
 
 ---
 
-### Step 7: Documentation & Validation
+### Step 8: Documentation & Validation
 Document findings and prepare for comparison.
 
 **Tasks:**
@@ -169,7 +189,7 @@ Document findings and prepare for comparison.
 
 ## Phase 5: ELK Comparison (Future)
 
-### Step 8: ELK Stack Implementation
+### Step 9: ELK Stack Implementation
 Implement equivalent monitoring with ELK stack.
 
 **Tasks:**
@@ -182,7 +202,7 @@ Implement equivalent monitoring with ELK stack.
 
 ---
 
-### Step 9: Comparative Analysis
+### Step 10: Comparative Analysis
 Compare both implementations.
 
 **Tasks:**
