@@ -1,2 +1,0 @@
-main.go:18:2: no required module provides package go.opentelemetry.io/otel/exporters/stdout/stdouttrace; to add it:
-	go get go.opentelemetry.io/otel/exporters/stdout/stdouttrace
