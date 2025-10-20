@@ -192,13 +192,13 @@ Document findings and prepare for comparison.
 Add Grafana for visualization and Loki for log aggregation.
 
 **Tasks:**
-- [ ] Add Grafana to monitoring-setup/docker-compose.yml
-- [ ] Add Loki (log aggregation) to monitoring-setup/docker-compose.yml
-- [ ] Add Promtail (log shipper) to api-sample/docker-compose.yml
-- [ ] Add cAdvisor for container metrics
-- [ ] Configure Prometheus to scrape cAdvisor
-- [ ] Configure Grafana datasources (Prometheus, Loki)
-- [ ] Set up Grafana provisioning
+- [x] Add Grafana to monitoring-setup/docker-compose.yml
+- [x] Add Loki (log aggregation) to monitoring-setup/docker-compose.yml
+- [x] Add Promtail (log shipper) to api-sample/docker-compose.yml
+- [x] Add cAdvisor for container metrics
+- [x] Configure Prometheus to scrape cAdvisor
+- [x] Configure Grafana datasources (Prometheus, Loki)
+- [x] Set up Grafana provisioning
 
 **Deliverables:**
 - Grafana accessible at http://localhost:3000
