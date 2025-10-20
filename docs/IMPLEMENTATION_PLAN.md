@@ -134,16 +134,16 @@ Add observability to the application.
 Create Locust tests to generate transaction volume for tracing.
 
 **Tasks:**
-- [ ] Create `testing` folder in `api-sample`
-- [ ] Create `locustfile.py` with test scenarios:
-  - [ ] Create resource test
-  - [ ] Read resource test
-  - [ ] Update resource test
-  - [ ] Delete resource test
-  - [ ] Mixed workload test
-- [ ] Create `requirements.txt` for Locust dependencies
-- [ ] Create test execution script
-- [ ] Document how to run performance tests
+- [x] Create `testing` folder in `api-sample`
+- [x] Create `locustfile.py` with test scenarios:
+  - [x] Create resource test
+  - [x] Read resource test
+  - [x] Update resource test
+  - [x] Delete resource test
+  - [x] Mixed workload test
+- [x] Create `requirements.txt` for Locust dependencies
+- [x] Create test execution script
+- [x] Document how to run performance tests
 
 **Deliverables:**
 - Locust performance test suite for generating trace volume
