@@ -186,6 +186,54 @@ Document findings and prepare for comparison.
 
 ---
 
+## Phase 5: Grafana Dashboards (DevOps + Development)
+
+### Step 9: Add Grafana and Log Aggregation
+Add Grafana for visualization and Loki for log aggregation.
+
+**Tasks:**
+- [ ] Add Grafana to monitoring-setup/docker-compose.yml
+- [ ] Add Loki (log aggregation) to monitoring-setup/docker-compose.yml
+- [ ] Add Promtail (log shipper) to api-sample/docker-compose.yml
+- [ ] Add cAdvisor for container metrics
+- [ ] Configure Prometheus to scrape cAdvisor
+- [ ] Configure Grafana datasources (Prometheus, Loki)
+- [ ] Set up Grafana provisioning
+
+**Deliverables:**
+- Grafana accessible at http://localhost:3000
+- Loki receiving application logs
+- Container metrics available in Prometheus
+
+---
+
+### Step 10: Create Application Monitoring Dashboard
+Build comprehensive dashboard with application selector.
+
+**Dashboard Panels:**
+- [ ] Application selector variable (dropdown for Docker containers)
+- [ ] CPU Usage (gauge + time series)
+- [ ] Memory Usage (gauge + time series)
+- [ ] Transaction Rate (requests/sec graph)
+- [ ] Error Rate (errors/sec graph + stat)
+- [ ] Apdex Score (gauge with thresholds)
+- [ ] Error Logs panel (with TraceID correlation)
+
+**Tasks:**
+- [ ] Create dashboard JSON configuration
+- [ ] Implement Apdex calculation query
+- [ ] Configure log parsing and labels
+- [ ] Add dashboard provisioning
+- [ ] Test all panels with real data
+- [ ] Document dashboard usage
+
+**Deliverables:**
+- Production-ready Grafana dashboard
+- Auto-provisioned on startup
+- All metrics displaying correctly
+
+---
+
 ## Quick Start Checklist
 
 ### DevOps Team
@@ -210,8 +258,9 @@ Document findings and prepare for comparison.
 
 - Docker & Docker Compose
 - Go 1.21+
+- Python 3.x (for Locust)
 - Network connectivity between containers
-- Ports available: 4317, 4318, 16686, 9090, 27017, 8080
+- Ports available: 3000, 3100, 4317, 4318, 8080, 8889, 9090, 16686, 27017
 
 ## Timeline Estimate
 
@@ -219,16 +268,21 @@ Document findings and prepare for comparison.
 - Phase 2: 1 day
 - Phase 3: 2-3 days
 - Phase 4: 1 day
+- Phase 5: 0.5 day
 
-**Total:** 5-6 days
+**Total:** 5.5-6.5 days
 - Phase 4: 1 day
 - **Total**: ~5-6 days for OpenTelemetry PoC
 
 ## Success Criteria
 
-- [ ] API successfully handles CRUD operations
-- [ ] Traces visible in Jaeger with complete request flow
-- [ ] Metrics visible in Prometheus
-- [ ] No performance degradation > 5%
-- [ ] All components running in Docker
-- [ ] Documentation complete
+- [x] API successfully handles CRUD operations
+- [x] Traces visible in Jaeger with complete request flow
+- [x] Metrics visible in Prometheus
+- [x] No performance degradation > 5%
+- [x] All components running in Docker
+- [x] Documentation complete
+- [ ] Grafana dashboard operational
+- [ ] All metrics (CPU, Memory, Transaction Rate, Error Rate, Apdex) displaying
+- [ ] Application selector working
+- [ ] Error logs with TraceID correlation visible
